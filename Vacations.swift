@@ -34,10 +34,23 @@ class Vacations {
 127.0.0.1    localhost
 255.255.255.255    broadcasthost
 ::1             localhost
+
 """
     
     /// Lists of the "toxic" hosts
-    let hostsList:[String] = ["youtube.com", "youtu.be", "roblox.com"]
+    let hostsList:[String] = [
+        "youtube.com", 
+        "youtu.be", 
+        "roblox.com", 
+        "minecraft.com", 
+        "steampowered.com",
+        "steamcommunity.com",
+        "steamgames.com",
+        "steamusercontent.com",
+        "steamcontent.com",
+        "steamstatic.com",
+        "akamaihd.net"
+    ]
     // TODO: Read the list of hosts from a file
     
     /// Lists of the re-routing IP addresses
@@ -60,11 +73,13 @@ class Vacations {
         
         if startCommands.contains(argumentsList[1]) {
             // TODO: start the service
+            self.start()
             print("The service started. Have a nice vacation!")
         }
         
         if stopCommands.contains(argumentsList[1]) {
             // TODO: stop the service
+            self.stop()
             print("The service stopped. Have a nice one!")
         }
         
@@ -82,16 +97,18 @@ extension Vacations {
         
         for host in self.hostsList{
             
+            body = body + "\n# --------------- \(host) ----------------\n\n" // just a nice separator
+            
             for ip in self.stopIP + self.stopIPv6{
                 
-                body = body + "\(ip)\t\t\t\(host)\n"
+                body = body + "\(ip)    \(host)\n"
                 
-                body = body + "\(ip)\t\t\twww.\(host)\n"
+                body = body + "\(ip)    www.\(host)\n"
                 
             }
             
         }
-        
+        print("in stop content")
         return(body)
     }
     
@@ -105,6 +122,7 @@ extension Vacations {
     /// Stops the service
     func stop(){
         self.writeHostFile(self.stopContent())
+        //print(self.stopContent())
     }
     
     /// Starts the service
