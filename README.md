@@ -13,16 +13,16 @@ Rewrites `\etc\hosts` file. Blocking `youtube` and `roblox` routing.
 Permits the access to `youtube` and `roblox` hosts:
 
 ```terminal
-> vacations -begin
+> sudo vacations -begin
 ```
 
 Blocks the access to `youtube` and `roblox` hosts:
 
 ```terminal
-> vacations -nomore
+> sudo vacations -nomore
 ```
 For the help of usage:
 
 ```terminal
-> vacations -?
+> sudo vacations -?
 ```
